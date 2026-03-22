@@ -10,6 +10,14 @@
             </a>
         </div>
         <div class="cf-nav-list d-flex flex-column justify-content-center">
+            <a href="#"
+               class="cf-nav-link cf-nav-theme"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Тема">
+                <input type="checkbox" class="cf-theme-switch" id="toggle-dark">
+                <span class="cf-nav-name">Переключить тему</span>
+            </a>
             <a href="{{ url_for('dashboard.index') }}"
                class="cf-nav-link {{ 'active' if request.endpoint.startswith('dashboard') else '' }}"
                data-spa-link
