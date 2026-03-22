@@ -1,0 +1,3 @@
+"""
+Bot Plugin Hooks Module
+"""

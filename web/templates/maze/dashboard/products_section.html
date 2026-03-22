@@ -1,0 +1,167 @@
+<!-- Top Products and Categories -->
+<div class="row mt-4">
+    <!-- Top Products -->
+    <div class="col-xl-6 col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Популярные товары</h5>
+                <a href="{{ url_for('products.index') }}" class="btn btn-sm btn-primary">Все товары</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Товар</th>
+                                <th>Продано</th>
+                                <th>Выручка</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-primary bg-opacity-10 rounded p-2 me-3">
+                                            <i class="bi bi-phone text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">iPhone 15 Pro</h6>
+                                            <small class="text-muted">Смартфоны</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><strong>45</strong></td>
+                                <td>₽2,250,000</td>
+                                <td><span class="badge bg-success">В наличии</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-success bg-opacity-10 rounded p-2 me-3">
+                                            <i class="bi bi-phone text-success"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">Samsung Galaxy S24</h6>
+                                            <small class="text-muted">Смартфоны</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><strong>38</strong></td>
+                                <td>₽1,520,000</td>
+                                <td><span class="badge bg-success">В наличии</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-info bg-opacity-10 rounded p-2 me-3">
+                                            <i class="bi bi-headphones text-info"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">AirPods Pro</h6>
+                                            <small class="text-muted">Аксессуары</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><strong>67</strong></td>
+                                <td>₽804,000</td>
+                                <td><span class="badge bg-warning">Мало</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-warning bg-opacity-10 rounded p-2 me-3">
+                                            <i class="bi bi-laptop text-warning"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">MacBook Air M2</h6>
+                                            <small class="text-muted">Ноутбуки</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><strong>12</strong></td>
+                                <td>₽1,200,000</td>
+                                <td><span class="badge bg-success">В наличии</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-secondary bg-opacity-10 rounded p-2 me-3">
+                                            <i class="bi bi-tablet text-secondary"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">iPad Pro</h6>
+                                            <small class="text-muted">Планшеты</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><strong>23</strong></td>
+                                <td>₽690,000</td>
+                                <td><span class="badge bg-danger">Нет в наличии</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="col-xl-6 col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Категории товаров</h5>
+                <button class="btn btn-sm btn-outline-secondary">Настроить</button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <canvas id="categoriesChart" height="200"></canvas>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Смартфоны</h6>
+                                <span class="badge bg-primary">45%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" style="width: 45%"></div>
+                            </div>
+                            <small class="text-muted">83 товара</small>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Аксессуары</h6>
+                                <span class="badge bg-success">25%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-success" style="width: 25%"></div>
+                            </div>
+                            <small class="text-muted">46 товаров</small>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Планшеты</h6>
+                                <span class="badge bg-info">20%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-info" style="width: 20%"></div>
+                            </div>
+                            <small class="text-muted">37 товаров</small>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Ноутбуки</h6>
+                                <span class="badge bg-warning">10%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-warning" style="width: 10%"></div>
+                            </div>
+                            <small class="text-muted">18 товаров</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

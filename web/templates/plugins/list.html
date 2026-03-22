@@ -1,0 +1,128 @@
+{% extends "maze/base.html" %}
+
+{% block title %}Плагины - TechTGShop{% endblock %}
+
+{% block page_title %}Управление плагинами{% endblock %}
+{% block page_subtitle %}Расширьте возможности вашего магазина дополнительными модулями{% endblock %}
+
+{% block breadcrumbs %}
+<li class="breadcrumb-item active" aria-current="page">Плагины</li>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-end gap-2">
+            <button class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Установить плагин
+            </button>
+            <button class="btn btn-success">
+                <i class="bi bi-arrow-clockwise"></i> Обновить все
+            </button>
+        </div>
+    </div>
+
+    <!-- Plugins Grid -->
+    <div class="row">
+        <div class="col-xl-4 col-lg-6 col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar avatar-lg bg-primary bg-opacity-10 rounded me-3">
+                            <i class="bi bi-box-seam text-primary fs-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Telegram Bot</h5>
+                            <span class="badge bg-success">Активен</span>
+                        </div>
+                    </div>
+                    <p class="text-muted">Основной плагин для интеграции с Telegram ботом</p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-gear"></i> Настройки
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning">
+                            <i class="bi bi-arrow-clockwise"></i> Обновить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar avatar-lg bg-success bg-opacity-10 rounded me-3">
+                            <i class="bi bi-credit-card text-success fs-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Payment Gateway</h5>
+                            <span class="badge bg-success">Активен</span>
+                        </div>
+                    </div>
+                    <p class="text-muted">Платежный шлюз для обработки оплат</p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-gear"></i> Настройки
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning">
+                            <i class="bi bi-arrow-clockwise"></i> Обновить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar avatar-lg bg-info bg-opacity-10 rounded me-3">
+                            <i class="bi bi-graph-up text-info fs-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Analytics</h5>
+                            <span class="badge bg-warning">Не настроен</span>
+                        </div>
+                    </div>
+                    <p class="text-muted">Аналитика и статистика продаж</p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-gear"></i> Настройки
+                        </button>
+                        <button class="btn btn-sm btn-outline-success">
+                            <i class="bi bi-play-circle"></i> Активировать
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar avatar-lg bg-secondary bg-opacity-10 rounded me-3">
+                            <i class="bi bi-cloud-download text-secondary fs-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-0">Backup</h5>
+                            <span class="badge bg-secondary">Не установлен</span>
+                        </div>
+                    </div>
+                    <p class="text-muted">Автоматическое резервное копирование данных</p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-info-circle"></i> Информация
+                        </button>
+                        <button class="btn btn-sm btn-outline-success">
+                            <i class="bi bi-download"></i> Установить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

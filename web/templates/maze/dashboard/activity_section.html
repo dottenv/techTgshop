@@ -1,0 +1,157 @@
+<!-- Recent Activity and Quick Actions -->
+<div class="row mt-4">
+    <!-- Recent Activity -->
+    <div class="col-xl-8 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Последняя активность</h5>
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-point bg-primary"></div>
+                        <div class="timeline-content">
+                            <h6>Новый заказ #1234</h6>
+                            <p class="text-muted">Иван Иванов оформил заказ на сумму ₽2,500</p>
+                            <small class="text-muted">2 минуты назад</small>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-point bg-success"></div>
+                        <div class="timeline-content">
+                            <h6>Товар добавлен</h6>
+                            <p class="text-muted">Добавлен новый товар "iPhone 15 Pro" в категорию "Смартфоны"</p>
+                            <small class="text-muted">15 минут назад</small>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-point bg-warning"></div>
+                        <div class="timeline-content">
+                            <h6>Заказ обработан</h6>
+                            <p class="text-muted">Заказ #1233 передан в службу доставки</p>
+                            <small class="text-muted">1 час назад</small>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-point bg-info"></div>
+                        <div class="timeline-content">
+                            <h6>Новый клиент</h6>
+                            <p class="text-muted">Мария Кузнецова зарегистрировалась в системе</p>
+                            <small class="text-muted">2 часа назад</small>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-point bg-danger"></div>
+                        <div class="timeline-content">
+                            <h6>Заказ отменен</h6>
+                            <p class="text-muted">Заказ #1232 был отменен клиентом</p>
+                            <small class="text-muted">3 часа назад</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="col-xl-4 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Быстрые действия</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('products.index') }}" class="btn btn-outline-primary">
+                        <i class="bi bi-plus-circle me-2"></i> Товары
+                    </a>
+                    <button class="btn btn-outline-success">
+                        <i class="bi bi-tags me-2"></i> Управление категориями
+                    </button>
+                    <a href="{{ url_for('orders.index') }}" class="btn btn-outline-info">
+                        <i class="bi bi-list-check me-2"></i> Управление заказами
+                    </a>
+                    <a href="{{ url_for('plugins.index') }}" class="btn btn-outline-warning">
+                        <i class="bi bi-plug me-2"></i> Управление плагинами
+                    </button>
+                    <button class="btn btn-outline-secondary">
+                        <i class="bi bi-people me-2"></i> Управление клиентами
+                    </button>
+                    <button class="btn btn-outline-dark">
+                        <i class="bi bi-gear me-2"></i> Настройки бота
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Status -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Состояние системы</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span>Бот</span>
+                    <span class="badge bg-success">Активен</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span>База данных</span>
+                    <span class="badge bg-success">Подключена</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span>Платежи</span>
+                    <span class="badge bg-success">Работают</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>Вебхук сервер</span>
+                    <span class="badge bg-warning">Проверка...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-point {
+    position: absolute;
+    left: -22px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.timeline-content h6 {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.timeline-content p {
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.timeline-content small {
+    font-size: 12px;
+}
+</style>

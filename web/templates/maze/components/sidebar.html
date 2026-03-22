@@ -1,0 +1,85 @@
+<div id="sidebar" data-spa-preserve class="cf-sidebar">
+    <div class="cf-sidebar-inner d-flex flex-column justify-content-between text-center">
+        <div class="cf-logo">
+            <a href="{{ url_for('dashboard.index') }}" data-spa-link>
+                <svg width="24" height="35" viewBox="0 0 24 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M0 11.238C0 5.04116 5.38297 0 12 0C18.617 0 24 5.04116 24 11.238V23.0477C24 29.2446 18.617 34.2857 12 34.2857C5.38297 34.2857 0 29.2446 0 23.0477V11.238ZM17.7495 26.6455C18.5093 25.5805 18.9149 24.3285 18.9149 23.0477C18.9128 21.3308 18.1836 19.6848 16.8873 18.4707C15.5909 17.2567 13.8333 16.5738 12 16.5719C10.6324 16.5719 9.29545 16.9517 8.1583 17.6633C7.02116 18.3748 6.13486 19.3862 5.61149 20.5695C5.08812 21.7528 4.95118 23.0549 5.21799 24.3111C5.48481 25.5672 6.14338 26.7211 7.11045 27.6268C8.07751 28.5324 9.30962 29.1492 10.651 29.3991C11.9923 29.6489 13.3827 29.5207 14.6462 29.0305C15.9097 28.5404 16.9897 27.7104 17.7495 26.6455ZM18.9094 11.5525V11.5046C18.9133 11.416 18.9149 11.3274 18.9156 11.238C18.9156 10.3876 18.7368 9.54552 18.3893 8.75984C18.0418 7.97416 17.5324 7.26027 16.8903 6.65894C16.2482 6.05761 15.4859 5.58061 14.647 5.25517C13.808 4.92973 12.9089 4.76223 12.0008 4.76223C11.0927 4.76223 10.1935 4.92973 9.35457 5.25517C8.51562 5.58061 7.75333 6.05761 7.11122 6.65894C6.46912 7.26027 5.95977 7.97416 5.61227 8.75984C5.26476 9.54552 5.0859 10.3876 5.0859 11.238V13.8646C7.10742 12.5265 9.52212 11.8079 11.9977 11.8079C14.4732 11.8079 16.8879 12.5265 18.9094 13.8646V11.5525ZM14.7702 22.3067C15.1315 23.74 14.1836 25.1762 12.6531 25.5145C11.1225 25.8528 9.58897 24.9651 9.22774 23.5317C8.8665 22.0984 9.81439 20.6622 11.3449 20.3239C12.8754 19.9856 14.409 20.8733 14.7702 22.3067Z"
+                          fill="#3b82f6"/>
+                </svg>
+            </a>
+        </div>
+        <div class="cf-nav-list d-flex flex-column justify-content-center">
+            <a href="{{ url_for('dashboard.index') }}"
+               class="cf-nav-link {{ 'active' if request.endpoint.startswith('dashboard') else '' }}"
+               data-spa-link
+               data-spa-prefetch="critical"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Главная">
+                <i class="cf-nav-icon bi bi-grid-fill"></i>
+                <span class="cf-nav-name">Главная</span>
+            </a>
+
+            <a href="{{ url_for('products.index') }}"
+               class="cf-nav-link {{ 'active' if request.endpoint.startswith('products') else '' }}"
+               data-spa-link
+               data-spa-prefetch="visible"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Товары">
+                <i class="cf-nav-icon bi bi-box-seam"></i>
+                <span class="cf-nav-name">Товары</span>
+            </a>
+
+            <a href="{{ url_for('orders.index') }}"
+               class="cf-nav-link {{ 'active' if request.endpoint.startswith('orders') else '' }}"
+               data-spa-link
+               data-spa-prefetch="visible"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Заказы">
+                <i class="cf-nav-icon bi bi-receipt"></i>
+                <span class="cf-nav-name">Заказы</span>
+            </a>
+
+            <a href="#"
+               class="cf-nav-link"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Клиенты">
+                <i class="cf-nav-icon bi bi-people"></i>
+                <span class="cf-nav-name">Клиенты</span>
+            </a>
+
+            <a href="#"
+               class="cf-nav-link"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Аналитика">
+                <i class="cf-nav-icon bi bi-bar-chart"></i>
+                <span class="cf-nav-name">Аналитика</span>
+            </a>
+
+            <a href="{{ url_for('plugins.index') }}"
+               class="cf-nav-link {{ 'active' if request.endpoint.startswith('plugins') else '' }}"
+               data-spa-link
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Плагины">
+                <i class="cf-nav-icon bi bi-plugin"></i>
+                <span class="cf-nav-name">Плагины</span>
+            </a>
+        </div>
+        <div class="cf-sidebar-bottom">
+            <a href="{{ url_for('auth.logout') }}"
+               class="cf-nav-link"
+               data-bs-toggle="tooltip"
+               data-bs-placement="right"
+               title="Выход">
+                <i class="cf-nav-icon bi bi-box-arrow-right"></i>
+                <span class="cf-nav-name">Выход</span>
+            </a>
+        </div>
+    </div>
+</div>

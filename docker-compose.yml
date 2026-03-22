@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: tech_tgshop_db
+    environment:
+      POSTGRES_DB: tech_tgshop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./pyproject.toml:/app/pyproject.toml
+      - ./shared:/app/shared
+    ports:
+      - "5432:5432"
+    networks:
+      - tech_tgshop_network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: tech_tgshop_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - tech_tgshop_network
+
+  # Telegram Bot
+  bot:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.bot
+    container_name: tech_tgshop_bot
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - DATABASE_URL=postgresql://postgres:postgres_password@postgres:5432/tech_tgshop
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./plugins:/app/plugins
+    networks:
+      - tech_tgshop_network
+    restart: unless-stopped
+
+  # Web Admin Panel
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web
+    container_name: tech_tgshop_web
+    environment:
+      - WEB_SECRET_KEY=${WEB_SECRET_KEY}
+      - DATABASE_URL=postgresql://postgres:postgres_password@postgres:5432/tech_tgshop
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./plugins:/app/plugins
+    networks:
+      - tech_tgshop_network
+    restart: unless-stopped
+
+  # Webhook Server
+  webhook:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.webhook
+    container_name: tech_tgshop_webhook
+    environment:
+      - WEBHOOK_SECRET_KEY=${WEBHOOK_SECRET_KEY}
+      - DATABASE_URL=postgresql://postgres:postgres_password@postgres:5432/tech_tgshop
+      - YOOKASSA_SECRET_KEY=${YOOKASSA_SECRET_KEY}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./plugins:/app/plugins
+    networks:
+      - tech_tgshop_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  tech_tgshop_network:
+    driver: bridge

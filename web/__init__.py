@@ -1,0 +1,3 @@
+"""
+Web Admin Panel Module
+"""

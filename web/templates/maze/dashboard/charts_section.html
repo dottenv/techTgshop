@@ -1,0 +1,95 @@
+<!-- Charts and Tables -->
+<div class="row mt-4">
+    <!-- Sales Chart -->
+    <div class="col-xl-8 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">График продаж</h5>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Последние 6 месяцев
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Последние 7 дней</a></li>
+                        <li><a class="dropdown-item" href="#">Последний месяц</a></li>
+                        <li><a class="dropdown-item" href="#">Последние 3 месяца</a></li>
+                        <li><a class="dropdown-item" href="#">Последние 6 месяцев</a></li>
+                        <li><a class="dropdown-item" href="#">Последний год</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <canvas id="salesChart" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="col-xl-4 col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Последние заказы</h5>
+                <a href="{{ url_for('orders.index') }}" class="btn btn-sm btn-primary">Все заказы</a>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">Заказ #1234</h6>
+                            <small class="text-muted">Иван Иванов</small>
+                            <div class="text-muted small">2 минуты назад</div>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-success">Оплачен</span>
+                            <div class="text-muted small">₽2,500</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">Заказ #1233</h6>
+                            <small class="text-muted">Петр Петров</small>
+                            <div class="text-muted small">15 минут назад</div>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-warning">В обработке</span>
+                            <div class="text-muted small">₽1,200</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">Заказ #1232</h6>
+                            <small class="text-muted">Анна Сидорова</small>
+                            <div class="text-muted small">1 час назад</div>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-danger">Отменен</span>
+                            <div class="text-muted small">₽3,800</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">Заказ #1231</h6>
+                            <small class="text-muted">Мария Кузнецова</small>
+                            <div class="text-muted small">2 часа назад</div>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-success">Доставлен</span>
+                            <div class="text-muted small">₽5,600</div>
+                        </div>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">Заказ #1230</h6>
+                            <small class="text-muted">Алексей Смирнов</small>
+                            <div class="text-muted small">3 часа назад</div>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-info">Отправлен</span>
+                            <div class="text-muted small">₽4,200</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

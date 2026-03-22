@@ -1,0 +1,153 @@
+{% extends "maze/base.html" %}
+
+{% block title %}Товары - TechTGShop{% endblock %}
+
+{% block page_title %}Управление товарами{% endblock %}
+{% block page_subtitle %}Просмотр и редактирование товаров вашего магазина{% endblock %}
+
+{% block breadcrumbs %}
+<li class="breadcrumb-item active" aria-current="page">Товары</li>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid products-page">
+    <div class="row mb-2">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <form method="get"
+                  class="row g-2 align-items-end flex-grow-1 me-3 products-filters"
+                  data-spa-form
+                  data-spa-target="#products-table-card"
+                  data-spa-live-search="true">
+                <div class="col-md-4">
+                    <label for="products-search" class="form-label mb-1">Поиск по товару или артикулу</label>
+                    <input type="text"
+                           id="products-search"
+                           name="q"
+                           class="form-control form-control-sm"
+                           placeholder="Например: iPhone 15 или IP15-PRO"
+                           value="{{ filters.q }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="products-supplier" class="form-label mb-1">Поставщик</label>
+                    <input type="text"
+                           id="products-supplier"
+                           name="supplier"
+                           class="form-control form-control-sm"
+                           placeholder="Название поставщика"
+                           value="{{ filters.supplier }}">
+                </div>
+                <div class="col-md-2">
+                    <label for="products-status" class="form-label mb-1">Статус</label>
+                    <select id="products-status"
+                            name="status"
+                            class="form-select form-select-sm">
+                        <option value="">Все</option>
+                        <option value="active" {{ 'selected' if filters.status == 'active' else '' }}>Активные</option>
+                        <option value="low_stock" {{ 'selected' if filters.status == 'low_stock' else '' }}>Малый остаток</option>
+                        <option value="inactive" {{ 'selected' if filters.status == 'inactive' else '' }}>Отключенные</option>
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex justify-content-end gap-2 mb-0">
+                    <button type="button"
+                            class="btn btn-sm btn-outline-secondary"
+                            data-spa-clear>
+                        Сбросить
+                    </button>
+                </div>
+            </form>
+            <div class="d-flex gap-2 mb-0">
+                <button class="btn btn-sm btn-primary">
+                    <i class="bi bi-plus-circle"></i> Добавить товар
+                </button>
+                <button class="btn btn-sm btn-success">
+                    <i class="bi bi-upload"></i> Импорт
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card" id="products-table-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Склад товаров</h5>
+                    <div class="text-muted small">
+                        Найдено: {{ products|length }}
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-nowrap">ID</th>
+                                    <th class="text-nowrap">Артикул</th>
+                                    <th>Товар</th>
+                                    <th>Категория</th>
+                                    <th>Поставщик</th>
+                                    <th class="text-nowrap">Дата закупки</th>
+                                    <th class="text-nowrap text-end">Закупка, ₽</th>
+                                    <th class="text-nowrap text-end">Цена, ₽</th>
+                                    <th class="text-nowrap text-end">Остаток</th>
+                                    <th class="text-nowrap text-end">Бронь</th>
+                                    <th class="text-nowrap text-end">Доступно</th>
+                                    <th class="text-nowrap">Статус</th>
+                                    <th class="text-nowrap text-end">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if products %}
+                                    {% for p in products %}
+                                        <tr>
+                                            <td class="text-muted small">{{ p.id }}</td>
+                                            <td class="font-monospace small text-nowrap">{{ p.sku }}</td>
+                                            <td class="text-nowrap">
+                                                <div class="fw-semibold">{{ p.name }}</div>
+                                            </td>
+                                            <td class="small text-muted text-nowrap">{{ p.category }}</td>
+                                            <td class="small text-nowrap">{{ p.supplier }}</td>
+                                            <td class="small text-nowrap">{{ p.purchase_date }}</td>
+                                            <td class="text-end small">
+                                                ₽{{ "{:,.0f}".format(p.purchase_price).replace(",", " ") }}
+                                            </td>
+                                            <td class="text-end small">
+                                                ₽{{ "{:,.0f}".format(p.price).replace(",", " ") }}
+                                            </td>
+                                            <td class="text-end small">{{ p.stock }}</td>
+                                            <td class="text-end small text-muted">{{ p.reserved }}</td>
+                                            <td class="text-end small fw-semibold">{{ p.available }}</td>
+                                            <td class="text-nowrap">
+                                                {% if p.status == 'active' %}
+                                                    <span class="badge bg-success">Активен</span>
+                                                {% elif p.status == 'low_stock' %}
+                                                    <span class="badge bg-warning text-dark">Малый остаток</span>
+                                                {% else %}
+                                                    <span class="badge bg-secondary">Отключен</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-end text-nowrap">
+                                                <button class="btn btn-sm btn-outline-primary me-1">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="13" class="text-center text-muted small py-3">
+                                            Товары не найдены. Измените параметры поиска или добавьте первый товар.
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
