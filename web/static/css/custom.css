@@ -169,7 +169,7 @@ body {
 }
 
 .products-filters {
-    padding: 0.75rem 1.5rem 0.5rem;
+    padding: 0.35rem 1.25rem 0.35rem;
     --bs-gutter-x: 0.5rem;
 }
 
@@ -185,6 +185,11 @@ body {
 
 .products-filters #products-supplier {
     min-width: 20ch;
+}
+
+.products-page #products-table-card .card-header {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
 }
 
 /* Compact sidebar from example, adapted to Maze layout */

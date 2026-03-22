@@ -16,59 +16,51 @@
         <div class="col-12">
             <div class="card" id="products-table-card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <div class="text-muted small">
-                        <div class="row mb-2">
-        <div class="col-12">
-            <form method="get"
-                  class="row g-2 align-items-end products-filters"
-                  data-spa-form
-                  data-spa-target="#products-table-card"
-                  data-spa-live-search="true">
-                <div class="col-md-5">
-                    <input type="text"
-                           id="products-search"
-                           name="q"
-                           class="form-control form-control-sm"
-                           placeholder="Например: iPhone 15 или IP15-PRO"
-                           value="{{ filters.q }}">
-                </div>
-                <div class="col-md-4">
-                    <input type="text"
-                           id="products-supplier"
-                           name="supplier"
-                           class="form-control form-control-sm"
-                           placeholder="Название поставщика"
-                           value="{{ filters.supplier }}">
-                </div>
-                <div class="col-md-3">
-                    <select id="products-status"
-                            name="status"
-                            class="form-select form-select-sm">
-                        <option value="">Все</option>
-                        <option value="active" {{ 'selected' if filters.status == 'active' else '' }}>Активные</option>
-                        <option value="low_stock" {{ 'selected' if filters.status == 'low_stock' else '' }}>Малый остаток</option>
-                        <option value="inactive" {{ 'selected' if filters.status == 'inactive' else '' }}>Отключенные</option>
-                    </select>
-                </div>
-            </form>
-        </div>
-    </div>
+                    <div class="flex-grow-1">
+                        <form method="get"
+                              class="row g-2 align-items-end products-filters"
+                              data-spa-form
+                              data-spa-target="#products-table-card"
+                              data-spa-live-search="true">
+                            <div class="col-md-7">
+                                <input type="text"
+                                       id="products-search"
+                                       name="q"
+                                       class="form-control form-control-sm"
+                                       placeholder="Например: iPhone 15 или IP15-PRO"
+                                       value="{{ filters.q }}">
+                            </div>
+                            <div class="col-md-5">
+                                <select id="products-status"
+                                        name="status"
+                                        class="form-select form-select-sm">
+                                    <option value="">Все</option>
+                                    <option value="active" {{ 'selected' if filters.status == 'active' else '' }}>Активные</option>
+                                    <option value="low_stock" {{ 'selected' if filters.status == 'low_stock' else '' }}>Малый остаток</option>
+                                    <option value="inactive" {{ 'selected' if filters.status == 'inactive' else '' }}>Отключенные</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 ms-2">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Управление таблицей">
-                            <button type="button" class="btn btn-outline-secondary">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productsFilterModal">
                                 <i class="bi bi-sliders"></i>
+                                <span class="d-none d-sm-inline ms-1">Фильтры</span>
                             </button>
                             <button type="button" class="btn btn-outline-secondary">
                                 <i class="bi bi-arrow-clockwise"></i>
+                                <span class="d-none d-sm-inline ms-1">Обновить</span>
                             </button>
                         </div>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Управление товарами">
                             <button class="btn btn-primary">
                                 <i class="bi bi-plus-circle"></i>
+                                <span class="d-none d-sm-inline ms-1">Новый</span>
                             </button>
                             <button class="btn btn-success">
                                 <i class="bi bi-upload"></i>
+                                <span class="d-none d-sm-inline ms-1">Импорт</span>
                             </button>
                         </div>
                     </div>
@@ -145,6 +137,107 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block modals %}
+<div class="modal fade" id="productsFilterModal" tabindex="-1" aria-labelledby="productsFilterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productsFilterModalLabel">Фильтры товаров</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <form method="get"
+                  data-spa-form
+                  data-spa-target="#products-table-card">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="filter-model" class="form-label">Модель / артикул</label>
+                            <input type="text"
+                                   id="filter-model"
+                                   name="model"
+                                   class="form-control form-control-sm"
+                                   placeholder="Например: iPhone 15 Pro"
+                                   value="{{ filters.model or '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="filter-supplier" class="form-label">Поставщик</label>
+                            <input type="text"
+                                   id="filter-supplier"
+                                   name="supplier"
+                                   class="form-control form-control-sm"
+                                   placeholder="Название поставщика"
+                                   value="{{ filters.supplier or '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Дата закупки с</label>
+                            <input type="date"
+                                   name="purchase_date_from"
+                                   class="form-control form-control-sm"
+                                   value="{{ filters.purchase_date_from or '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Дата закупки по</label>
+                            <input type="date"
+                                   name="purchase_date_to"
+                                   class="form-control form-control-sm"
+                                   value="{{ filters.purchase_date_to or '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Цена, от</label>
+                            <input type="number"
+                                   name="price_min"
+                                   class="form-control form-control-sm"
+                                   placeholder="Минимальная цена"
+                                   value="{{ filters.price_min or '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Цена, до</label>
+                            <input type="number"
+                                   name="price_max"
+                                   class="form-control form-control-sm"
+                                   placeholder="Максимальная цена"
+                                   value="{{ filters.price_max or '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Цвет</label>
+                            <input type="text"
+                                   name="color"
+                                   class="form-control form-control-sm"
+                                   placeholder="Например: черный, зеленый"
+                                   value="{{ filters.color or '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Статус</label>
+                            <select name="status" class="form-select form-select-sm">
+                                <option value="">Все</option>
+                                <option value="active" {{ 'selected' if filters.status == 'active' else '' }}>Активные</option>
+                                <option value="low_stock" {{ 'selected' if filters.status == 'low_stock' else '' }}>Малый остаток</option>
+                                <option value="inactive" {{ 'selected' if filters.status == 'inactive' else '' }}>Отключенные</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button"
+                            class="btn btn-sm btn-outline-secondary"
+                            data-spa-clear>
+                        Сбросить фильтры
+                    </button>
+                    <div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" data-bs-dismiss="modal">
+                            Закрыть
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            Применить
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

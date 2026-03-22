@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request
+from datetime import datetime
 
 products_bp = Blueprint('products', __name__)
 
@@ -8,6 +9,12 @@ def index():
     q = (request.args.get('q') or '').strip()
     supplier = (request.args.get('supplier') or '').strip()
     status = (request.args.get('status') or '').strip()
+    model = (request.args.get('model') or '').strip()
+    color = (request.args.get('color') or '').strip()
+    price_min_raw = (request.args.get('price_min') or '').strip()
+    price_max_raw = (request.args.get('price_max') or '').strip()
+    date_from_raw = (request.args.get('purchase_date_from') or '').strip()
+    date_to_raw = (request.args.get('purchase_date_to') or '').strip()
 
     products = [
         {
@@ -103,13 +110,43 @@ def index():
         }
     ]
 
+    price_min = None
+    price_max = None
+    try:
+        if price_min_raw:
+            price_min = int(price_min_raw)
+    except ValueError:
+        price_min = None
+    try:
+        if price_max_raw:
+            price_max = int(price_max_raw)
+    except ValueError:
+        price_max = None
+
+    date_from = None
+    date_to = None
+    try:
+        if date_from_raw:
+            date_from = datetime.strptime(date_from_raw, '%Y-%m-%d').date()
+    except ValueError:
+        date_from = None
+    try:
+        if date_to_raw:
+            date_to = datetime.strptime(date_to_raw, '%Y-%m-%d').date()
+    except ValueError:
+        date_to = None
+
     def matches(product):
         text = f"{product['name']} {product['sku']} {product['category']}".lower()
         supplier_text = product['supplier'].lower()
 
         if q and q.lower() not in text:
             return False
+        if model and model.lower() not in text:
+            return False
         if supplier and supplier.lower() not in supplier_text:
+            return False
+        if color and color.lower() not in product['name'].lower():
             return False
         if status:
             if status == 'active' and product['status'] != 'active':
@@ -118,6 +155,20 @@ def index():
                 return False
             if status == 'inactive' and product['status'] != 'inactive':
                 return False
+        if price_min is not None and product['price'] < price_min:
+            return False
+        if price_max is not None and product['price'] > price_max:
+            return False
+        if date_from or date_to:
+            try:
+                pd = datetime.strptime(product['purchase_date'], '%d.%m.%Y').date()
+            except ValueError:
+                pd = None
+            if pd:
+                if date_from and pd < date_from:
+                    return False
+                if date_to and pd > date_to:
+                    return False
         return True
 
     filtered_products = [p for p in products if matches(p)]
@@ -129,6 +180,12 @@ def index():
         'q': q,
         'supplier': supplier,
         'status': status,
+        'model': model,
+        'color': color,
+        'price_min': price_min_raw,
+        'price_max': price_max_raw,
+        'purchase_date_from': date_from_raw,
+        'purchase_date_to': date_to_raw,
     }
 
     return render_template('products/list.html', products=filtered_products, filters=filters)
