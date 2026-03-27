@@ -355,3 +355,12 @@ body {
     font-weight: 600;
     color: #e5e7eb;
 }
+
+@media (min-width: 992px) {
+    .offcanvas.offcanvas-start,
+    .offcanvas.offcanvas-end {
+        --bs-offcanvas-width: 400px;
+        max-width: 400px;
+        width: min(100%, 400px);
+    }
+}
